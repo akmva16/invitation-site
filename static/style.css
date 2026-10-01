@@ -1,0 +1,653 @@
+/* ===== ОБЩИЕ СТИЛИ ===== */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Segoe UI', 'Georgia', Arial, sans-serif;
+}
+
+body {
+    min-height: 100vh;
+    background: linear-gradient(135deg, #ffe0ec 0%, #ffd1dc 50%, #f8c8dc 100%);
+    color: #6b2c4a;
+    overflow-x: hidden;
+    overflow-y: auto;    /* ← разрешаем прокрутку по вертикали */
+}
+
+.hidden {
+    display: none !important;
+}
+
+/* ===== ЗАСТАВКА ===== */
+.cover {
+    position: fixed;
+    top: 0; left: 0;
+    width: 100%; height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background: linear-gradient(135deg, #ffd1dc 0%, #ffe0ec 50%, #ffc7d8 100%);
+    z-index: 100;
+    transition: opacity 0.8s ease, transform 0.8s ease;
+}
+
+.cover.fade-out {
+    opacity: 0;
+    transform: scale(1.2);
+    pointer-events: none;
+}
+
+.cover-content {
+    text-align: center;
+    padding: 40px;
+    animation: fadeInUp 1s ease;
+}
+
+.envelope {
+    font-size: 120px;
+    margin-bottom: 20px;
+    animation: bounce 2s infinite;
+}
+
+.cover h1 {
+    font-size: 32px;
+    color: #c94f7c;
+    margin-bottom: 30px;
+    font-weight: 400;
+}
+
+#openButton {
+    font-size: 22px;
+    padding: 18px 45px;
+    background: linear-gradient(135deg, #ff8fab, #ff6b9d);
+    color: white;
+    border: none;
+    border-radius: 50px;
+    cursor: pointer;
+    box-shadow: 0 10px 30px rgba(255, 107, 157, 0.5);
+    transition: all 0.3s ease;
+    font-family: inherit;
+}
+
+#openButton:hover {
+    transform: translateY(-3px) scale(1.05);
+    box-shadow: 0 15px 40px rgba(255, 107, 157, 0.7);
+}
+
+#openButton:active {
+    transform: scale(0.98);
+}
+
+/* ===== ОСНОВНОЙ КОНТЕНТ ===== */
+.main {
+    min-height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: flex-start;    /* ← было center, теперь flex-start */
+    padding: 40px 20px;
+    animation: fadeIn 1s ease;
+}
+
+.container {
+    max-width: 600px;
+    width: 100%;
+    background: rgba(255, 255, 255, 0.7);
+    backdrop-filter: blur(20px);
+    border-radius: 30px;
+    padding: 50px 40px;
+    box-shadow: 0 20px 60px rgba(255, 143, 171, 0.3);
+    text-align: center;
+    position: relative;
+}
+
+h1 {
+    font-size: 36px;
+    color: #c94f7c;
+    margin-bottom: 15px;
+    font-weight: 500;
+}
+
+.subtitle {
+    font-size: 20px;
+    color: #8a4a68;
+    margin-bottom: 35px;
+    line-height: 1.6;
+    font-style: italic;
+}
+
+/* ===== ВЫБОР ДАТЫ ===== */
+.date-picker {
+    margin-bottom: 30px;
+    text-align: left;
+    display: inline-block;
+}
+
+.date-picker label {
+    display: block;
+    margin-bottom: 10px;
+    color: #8a4a68;
+    font-size: 16px;
+}
+
+#dateInput {
+    font-size: 18px;
+    padding: 12px 20px;
+    border: 2px solid #ffb6c9;
+    border-radius: 15px;
+    background: white;
+    color: #6b2c4a;
+    font-family: inherit;
+    cursor: pointer;
+    outline: none;
+    transition: border 0.3s;
+}
+
+#dateInput:focus {
+    border-color: #ff6b9d;
+    box-shadow: 0 0 15px rgba(255, 107, 157, 0.3);
+}
+
+/* ===== КНОПКИ ===== */
+.buttons {
+    display: flex;
+    gap: 20px;
+    justify-content: center;
+    margin-bottom: 35px;
+    flex-wrap: wrap;
+    position: relative;
+    min-height: 80px;
+    /* Кнопка "НЕТ" выйдет из потока (position: absolute) */
+}
+
+.btn {
+    font-size: 18px;
+    padding: 15px 40px;
+    border: none;
+    border-radius: 50px;
+    cursor: pointer;
+    font-family: inherit;
+    font-weight: 600;
+    transition: all 0.3s ease;
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.1);
+}
+
+.btn-yes {
+    background: linear-gradient(135deg, #ff8fab, #ff4d8a);
+    color: white;
+}
+
+.btn-yes:hover {
+    transform: translateY(-3px) scale(1.05);
+    box-shadow: 0 12px 30px rgba(255, 77, 138, 0.5);
+}
+
+.btn-no {
+    background: linear-gradient(135deg, #e0e0e0, #b8b8b8);
+    color: #555;
+    position: relative;
+    transition: all 0.3s ease;
+}
+
+.btn-secret {
+    background: linear-gradient(135deg, #d4b5ff, #b18cff);
+    color: white;
+    padding: 15px 20px;
+    font-size: 20px;
+}
+
+.btn-send {
+    background: linear-gradient(135deg, #ffb3d1, #ff8fab);
+    color: white;
+    font-size: 16px;
+    padding: 12px 30px;
+    margin-top: 10px;
+}
+
+.btn-send:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 10px 25px rgba(255, 143, 171, 0.5);
+}
+
+/* ===== СООБЩЕНИЕ ===== */
+.message-box {
+    text-align: left;
+    margin-top: 30px;
+    padding-top: 30px;
+    border-top: 1px dashed #ffb6c9;
+}
+
+.message-box label {
+    display: block;
+    margin-bottom: 10px;
+    color: #8a4a68;
+    font-size: 16px;
+}
+
+#messageInput {
+    width: 100%;
+    padding: 15px;
+    border: 2px solid #ffb6c9;
+    border-radius: 15px;
+    background: white;
+    font-size: 15px;
+    font-family: inherit;
+    color: #6b2c4a;
+    resize: vertical;
+    outline: none;
+    transition: border 0.3s;
+}
+
+#messageInput:focus {
+    border-color: #ff6b9d;
+    box-shadow: 0 0 15px rgba(255, 107, 157, 0.3);
+}
+
+/* ===== ОТВЕТ ===== */
+.response {
+    margin-top: 25px;
+    padding: 20px;
+    background: linear-gradient(135deg, #fff0f5, #ffe0ec);
+    border-radius: 20px;
+    color: #c94f7c;
+    font-size: 18px;
+    font-weight: 500;
+    animation: fadeInUp 0.5s ease;
+}
+
+/* ===== АНИМАЦИИ ===== */
+@keyframes bounce {
+    0%, 100% { transform: translateY(0); }
+    50% { transform: translateY(-15px); }
+}
+
+@keyframes fadeIn {
+    from { opacity: 0; }
+    to { opacity: 1; }
+}
+
+@keyframes fadeInUp {
+    from {
+        opacity: 0;
+        transform: translateY(30px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+/* ===== МОБИЛЬНАЯ ВЕРСИЯ ===== */
+@media (max-width: 600px) {
+    h1 { font-size: 26px; }
+    .subtitle { font-size: 16px; }
+    .container { padding: 35px 25px; }
+    .envelope { font-size: 80px; }
+    .cover h1 { font-size: 22px; }
+    #openButton { font-size: 18px; padding: 15px 35px; }
+}
+/* ===== ВСПЛЫВАЮЩЕЕ СООБЩЕНИЕ У КНОПКИ "НЕТ" ===== */
+.floating-message {
+    position: fixed;
+    background: linear-gradient(135deg, #ff4d8a, #ff8fab);
+    color: white;
+    padding: 10px 18px;
+    border-radius: 20px;
+    font-size: 15px;
+    font-weight: 600;
+    white-space: nowrap;
+    box-shadow: 0 8px 25px rgba(255, 77, 138, 0.6);
+    pointer-events: none;
+    z-index: 10000;
+    opacity: 1;
+    transform: translateY(0);
+    transition: opacity 0.4s ease, transform 0.4s ease;
+    animation: msgPop 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);
+}
+
+/* Хвостик у сообщения */
+.floating-message::before {
+    content: '';
+    position: absolute;
+    left: -8px;
+    top: 50%;
+    transform: translateY(-50%);
+    width: 0;
+    height: 0;
+    border-top: 8px solid transparent;
+    border-bottom: 8px solid transparent;
+    border-right: 10px solid #ff4d8a;
+}
+
+@keyframes msgPop {
+    0% {
+        transform: scale(0.3) translateY(20px);
+        opacity: 0;
+    }
+    100% {
+        transform: scale(1) translateY(0);
+        opacity: 1;
+    }
+}
+/* ===== БОЛЬШОЕ ОКНО ОТВЕТА ПРИ "ДА" ===== */
+.big-response-modal {
+    position: fixed !important;
+    top: 0 !important;
+    left: 0 !important;
+    width: 100vw !important;
+    height: 100vh !important;
+    background: rgba(255, 220, 235, 0.95);
+    backdrop-filter: blur(15px);
+    z-index: 9999999 !important;
+    display: flex !important;
+    justify-content: center !important;
+    align-items: center !important;
+    padding: 20px;
+    animation: fadeIn 0.4s ease;
+}
+
+.big-response-content {
+    background: white;
+    border-radius: 40px;
+    padding: 60px 50px;
+    text-align: center;
+    max-width: 600px;
+    width: 100%;
+    box-shadow: 0 30px 80px rgba(255, 77, 138, 0.6);
+    animation: bounceIn 0.7s cubic-bezier(0.34, 1.56, 0.64, 1);
+    border: 3px solid #ff8fab;
+}
+
+.big-hearts {
+    font-size: 60px;
+    margin-bottom: 20px;
+    animation: bounce 1s infinite;
+}
+
+.big-response-content h1 {
+    font-size: 48px;
+    color: #ff4d8a;
+    margin-bottom: 25px;
+    text-shadow: 0 0 30px rgba(255, 77, 138, 0.5);
+}
+
+.big-response-content p {
+    font-size: 24px;
+    color: #8a4a68;
+    line-height: 1.6;
+    margin-bottom: 35px;
+}
+
+.big-response-close {
+    padding: 15px 50px;
+    background: linear-gradient(135deg, #ff8fab, #ff4d8a);
+    color: white;
+    border: none;
+    border-radius: 30px;
+    font-size: 18px;
+    font-weight: 600;
+    cursor: pointer;
+    font-family: inherit;
+    box-shadow: 0 10px 30px rgba(255, 77, 138, 0.4);
+    transition: all 0.3s;
+}
+
+.big-response-close:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 15px 40px rgba(255, 77, 138, 0.6);
+}
+
+@keyframes bounceIn {
+    0% {
+        opacity: 0;
+        transform: scale(0.3);
+    }
+    50% {
+        transform: scale(1.05);
+    }
+    100% {
+        opacity: 1;
+        transform: scale(1);
+    }
+}
+/* ===== ВЫБОР ЧЕМ ЗАНЯТЬСЯ ===== */
+.activity-picker {
+    margin-bottom: 30px;
+    text-align: center;
+}
+
+.activity-picker label {
+    display: block;
+    margin-bottom: 12px;
+    color: #8a4a68;
+    font-size: 16px;
+}
+
+.activity-buttons {
+    display: flex;
+    gap: 12px;
+    justify-content: center;
+    flex-wrap: wrap;
+}
+
+.activity-btn {
+    padding: 12px 22px;
+    font-size: 15px;
+    background: white;
+    border: 2px solid #ffb6c9;
+    color: #8a4a68;
+    border-radius: 20px;
+    cursor: pointer;
+    font-family: inherit;
+    transition: all 0.3s;
+    font-weight: 500;
+}
+
+.activity-btn:hover {
+    background: #fff0f5;
+    border-color: #ff6b9d;
+    transform: translateY(-2px);
+}
+
+.activity-btn.selected {
+    background: linear-gradient(135deg, #ff8fab, #ff4d8a);
+    color: white;
+    border-color: #ff4d8a;
+    box-shadow: 0 8px 20px rgba(255, 77, 138, 0.4);
+}
+/* ===== МОДАЛЬНОЕ ОКНО "САМ РЕШУУУУ" ===== */
+.secret-modal {
+    position: fixed !important;
+    top: 0 !important;
+    left: 0 !important;
+    width: 100vw !important;
+    height: 100vh !important;
+    background: rgba(255, 182, 201, 0.95);
+    backdrop-filter: blur(15px);
+    z-index: 9999999 !important;
+    display: flex !important;
+    justify-content: center !important;
+    align-items: center !important;
+    padding: 20px;
+    animation: fadeIn 0.3s ease;
+}
+
+.secret-content {
+    background: white;
+    border-radius: 30px;
+    padding: 50px 40px;
+    text-align: center;
+    max-width: 500px;
+    width: 100%;
+    box-shadow: 0 30px 80px rgba(255, 77, 138, 0.5);
+    animation: fadeInUp 0.5s ease;
+    max-height: 90vh;
+    overflow-y: auto;
+}
+
+.secret-content h1 {
+    font-size: 32px;
+    color: #c94f7c;
+    margin-bottom: 10px;
+}
+
+.secret-content h2 {
+    font-size: 42px;
+    color: #ff4d8a;
+    margin-bottom: 25px;
+    animation: pulse 1.5s infinite;
+}
+
+.secret-content p {
+    color: #8a4a68;
+    margin-bottom: 25px;
+    font-size: 17px;
+}
+
+.secret-buttons {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+    margin-bottom: 25px;
+}
+
+.secret-option {
+    padding: 15px 25px;
+    font-size: 17px;
+    background: linear-gradient(135deg, #fff0f5, #ffe0ec);
+    border: 2px solid #ffb6c9;
+    color: #c94f7c;
+    border-radius: 20px;
+    cursor: pointer;
+    font-family: inherit;
+    transition: all 0.3s;
+    font-weight: 500;
+}
+
+.secret-option:hover {
+    background: linear-gradient(135deg, #ff8fab, #ff6b9d);
+    color: white;
+    transform: scale(1.05);
+    border-color: #ff6b9d;
+}
+
+.secret-close {
+    padding: 10px 30px;
+    background: #e0e0e0;
+    border: none;
+    border-radius: 20px;
+    cursor: pointer;
+    font-size: 15px;
+    color: #555;
+    font-family: inherit;
+}
+
+.secret-close:hover {
+    background: #d0d0d0;
+}
+
+@keyframes pulse {
+    0%, 100% { transform: scale(1); }
+    50% { transform: scale(1.1); }
+}
+/* ===== ФОН: ЛЕТАЮЩИЕ СЕРДЕЧКИ ===== */
+.hearts-bg {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    pointer-events: none;   /* чтобы не мешали кликам */
+    overflow: hidden;
+    z-index: 0;             /* под всем остальным */
+}
+
+.heart-float {
+    position: absolute;
+    bottom: -60px;
+    font-size: 24px;
+    opacity: 0.7;
+    animation: floatUp linear infinite;
+    user-select: none;
+    pointer-events: none;
+    filter: drop-shadow(0 0 6px rgba(255, 77, 138, 0.5));
+}
+
+@keyframes floatUp {
+    0% {
+        transform: translateY(0) rotate(0deg) scale(0.7);
+        opacity: 0;
+    }
+    10% {
+        opacity: 0.7;
+    }
+    90% {
+        opacity: 0.5;
+    }
+    100% {
+        transform: translateY(-110vh) rotate(360deg) scale(1.2);
+        opacity: 0;
+    }
+}
+
+/* Чтобы .container и .cover были ВЫШЕ сердечек */
+.main, .cover {
+    position: relative;
+    z-index: 10;
+}
+/* ===== ОБРАТНЫЙ ОТСЧЁТ В МОДАЛКЕ ===== */
+.countdown-block {
+    background: linear-gradient(135deg, #fff0f5, #ffe0ec);
+    border-radius: 25px;
+    padding: 25px 20px;
+    margin: 25px 0;
+    border: 2px dashed #ff8fab;
+}
+
+.countdown-label {
+    font-size: 17px;
+    color: #c94f7c;
+    margin-bottom: 18px;
+    font-weight: 600;
+}
+
+.countdown {
+    display: flex;
+    justify-content: center;
+    gap: 12px;
+    flex-wrap: wrap;
+    margin-bottom: 15px;
+}
+
+.countdown-item {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    min-width: 70px;
+    background: white;
+    border-radius: 15px;
+    padding: 12px 8px;
+    box-shadow: 0 5px 15px rgba(255, 77, 138, 0.15);
+}
+
+.countdown-num {
+    font-size: 30px;
+    font-weight: bold;
+    color: #ff4d8a;
+    line-height: 1;
+    text-shadow: 0 0 15px rgba(255, 77, 138, 0.4);
+}
+
+.countdown-text {
+    font-size: 12px;
+    color: #8a4a68;
+    margin-top: 6px;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+}
+
+.countdown-date {
+    font-size: 15px;
+    color: #8a4a68;
+    font-weight: 500;
+    margin-top: 10px;
+}

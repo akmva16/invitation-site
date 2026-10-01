@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>💌 Приглашение для Дюшесика</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+    <!-- ФОН С ЛЕТАЮЩИМИ СЕРДЕЧКАМИ -->
+    <div id="hearts-bg" class="hearts-bg"></div>
+
+    <!-- ЗАСТАВКА (видна сначала) -->
+    <div id="cover" class="cover">
+        <div class="cover-content">
+            <div class="envelope">💌</div>
+            <h1>Андрей, тут кое-что для тебя...</h1>
+            <button id="openButton">Открыть приглашение 💕</button>
+        </div>
+    </div>
+
+    <!-- ОСНОВНОЙ КОНТЕНТ (скрыт, пока не нажали кнопку) -->
+    <div id="main" class="main hidden">
+        <div class="container">
+            <h1>💖 Привет, Андрей! 💖</h1>
+            <p class="subtitle">Хочу пригласить тебя погулять<br>или покататься на твоей тачечке 🚗</p>
+
+            <div class="date-picker">
+                <label for="dateInput">Выбери дату:</label>
+                <input type="date" id="dateInput">
+            </div>
+
+
+            <div class="buttons">
+                <button id="yesButton" class="btn btn-yes">💖 ДА</button>
+                <button id="noButton" class="btn btn-no">🌸 НЕТ</button>
+                <button id="secretButton" class="btn btn-secret" title="?">🤫</button>
+            </div>
+
+            <div class="message-box">
+                <label for="messageInput">Оставь мне сообщение:</label>
+                <textarea id="messageInput" rows="3" placeholder="Напиши что-нибудь..."></textarea>
+                <button id="sendButton" class="btn btn-send">Отправить 💌</button>
+            </div>
+
+            <div id="response" class="response hidden"></div>
+        </div>
+    </div>
+
+    <script src="{{ url_for('static', filename='script.js') }}"></script>
+</body>
+</html>
