@@ -93,10 +93,12 @@ def answer():
     with open(MESSAGES_FILE, "a", encoding="utf-8") as f:
         f.write(entry)
 
-    # Вывод в консоль с правильной кодировкой
+           # Вывод в консоль с правильной кодировкой
     print(f">>> Ответ сохранён: {answer_type}")
+    if date:
+        print(f"    [ДАТА] {date}")
     if message:
-        print(f"    Сообщение: {message}")
+        print(f"    [СООБЩЕНИЕ] {message}")
     
     return jsonify({"status": "ok", "received": answer_type})
 
