@@ -56,7 +56,15 @@ def home():
     print(">>> Кто-то зашёл на главную!")
     visits = increment_visit()
     return render_template("index.html", visits=visits)
-
+@app.route("/api/messages")
+def get_messages():
+    """Показывает содержимое messages.txt"""
+    if os.path.exists(MESSAGES_FILE):
+        with open(MESSAGES_FILE, "r", encoding="utf-8") as f:
+            content = f.read()
+    else:
+        content = "Пока никто не отвечал"
+    return f"<pre style='font-size:18px; padding:20px'>{content}</pre>"
 
 @app.route("/api/visits")
 def get_visits():
